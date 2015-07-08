@@ -6,3 +6,5 @@
 /build
 
 build.gradle
+
+app/build.gradle
