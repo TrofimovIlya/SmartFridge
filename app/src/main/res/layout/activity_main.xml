@@ -11,5 +11,4 @@
             android:gravity="center"
             android:text="Main" />
 
-
 </FrameLayout>
