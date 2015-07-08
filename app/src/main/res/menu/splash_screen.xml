@@ -1,6 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="ru.hse.smartrefrigerator.activities.SplashScreenActivity" >
+    tools:context="ru.hse.smartrefrigerator.views.activities.SplashScreenActivity" >
     <item android:id="@+id/action_settings"
         android:title="@string/action_settings"
         android:orderInCategory="100"

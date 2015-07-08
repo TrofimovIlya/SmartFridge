@@ -1,4 +1,4 @@
-package ru.hse.smartrefrigerator.activities;
+package ru.hse.smartrefrigerator.views.activities;
 
 import android.app.Activity;
 import android.content.Context;

@@ -1,22 +1,36 @@
-package ru.hse.smartrefrigerator.activities;
+package ru.hse.smartrefrigerator.views.activities;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+
+import com.google.android.gms.auth.GoogleAuthUtil;
+import com.google.android.gms.common.AccountPicker;
+
 import ru.hse.smartrefrigerator.R;
 
-public class AuthenticationActivity extends Activity {
+
+public class MainActivity extends Activity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_authentication);
+        setContentView(R.layout.activity_main);
+
+
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.authentication, menu);
+        getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
