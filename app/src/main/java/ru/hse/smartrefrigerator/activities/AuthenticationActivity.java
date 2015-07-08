@@ -1,4 +1,4 @@
-package ru.hse.smartrefrigerator.views.activities;
+package ru.hse.smartrefrigerator.activities;
 
 import android.accounts.AccountManager;
 import android.app.Activity;

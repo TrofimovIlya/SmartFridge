@@ -13,40 +13,38 @@
                   android:orientation="horizontal">
 
         <ImageButton android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_facebook_48dp"
-            android:background="#3B5998"
-            android:id="@+id/bLoginFB"
-            android:text="FB"/>
+                     android:layout_height="wrap_content"
+                     android:src="@drawable/ic_facebook_48dp"
+                     android:background="#3B5998"
+                     android:id="@+id/bLoginFB"
+                     android:text="FB"/>
 
 
         <ImageButton android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_twitter_48dp"
-            android:background="#00ACED"
-            android:layout_marginLeft="8dp"
-            android:id="@+id/bLoginTW"
-            android:text="TW"/>
+                     android:layout_height="wrap_content"
+                     android:src="@drawable/ic_twitter_48dp"
+                     android:background="#00ACED"
+                     android:layout_marginLeft="8dp"
+                     android:id="@+id/bLoginTW"
+                     android:text="TW"/>
 
         <ImageButton android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_vk_48dp"
-            android:layout_marginLeft="8dp"
-            android:background="#007DC5"
-            android:id="@+id/bLoginVK"
-            android:text="VK"/>
+                     android:layout_height="wrap_content"
+                     android:src="@drawable/ic_vk_48dp"
+                     android:layout_marginLeft="8dp"
+                     android:background="#007DC5"
+                     android:id="@+id/bLoginVK"
+                     android:text="VK"/>
 
     </LinearLayout>
 
     <ImageButton android:layout_width="160dp"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_google_plus_48dp"
-        android:background="#DD4B39"
-        android:layout_marginTop="8sp"
-        android:layout_gravity="center_horizontal"
-        android:id="@+id/bLoginGPlus"
-        android:text="G+"
-
-        />
+                 android:layout_height="wrap_content"
+                 android:src="@drawable/ic_google_plus_48dp"
+                 android:background="#DD4B39"
+                 android:layout_marginTop="8sp"
+                 android:layout_gravity="center_horizontal"
+                 android:id="@+id/bLoginGPlus"
+                 android:text="G+"/>
 
 </LinearLayout>

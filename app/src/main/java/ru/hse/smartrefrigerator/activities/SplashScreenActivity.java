@@ -1,4 +1,4 @@
-package ru.hse.smartrefrigerator.views.activities;
+package ru.hse.smartrefrigerator.activities;
 
 import android.app.Activity;
 import android.content.Context;
@@ -34,7 +34,7 @@ public class SplashScreenActivity extends Activity {
 
                 mContext.startActivity(intent);
             }
-        }, 2500);
+        }, 3500);
     }
 
     @Override
