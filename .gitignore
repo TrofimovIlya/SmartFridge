@@ -14,3 +14,13 @@ app/build.gradle
 app/app.iml
 
 app/app.iml
+
+.idea/gradle.xml
+
+.idea/gradle.xml
+
+.idea/misc.xml
+
+gradle/wrapper/gradle-wrapper.properties
+
+SmartRefrigerator.iml
