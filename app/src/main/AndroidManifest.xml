@@ -28,7 +28,8 @@
         </activity>
         <activity
             android:name=".activities.InputProductActivity"
-            android:label="@string/title_activity_input_product" >
+            android:label="@string/title_activity_input_product"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

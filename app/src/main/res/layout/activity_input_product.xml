@@ -17,6 +17,7 @@
             android:layout_height="fill_parent"
             android:id="@+id/bVoiceRecorder"
             android:layout_weight="1"
+            android:src="@drawable/ic_mic"
             />
 
         <View
@@ -28,7 +29,8 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:id="@+id/bCodeScanner"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:src="@drawable/ic_code"/>
         </LinearLayout>
 
 

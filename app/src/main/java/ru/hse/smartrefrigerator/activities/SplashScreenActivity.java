@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import ru.hse.smartrefrigerator.R;
@@ -18,21 +19,26 @@ public class SplashScreenActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_splash_screen);
         mContext = this;
+        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+
 
         new Handler().postDelayed(new Runnable() {
             public void run() {
-                SharedPreferences settings = getPreferences(0);
+                //SharedPreferences settings = getPreferences(0);
 
                 Intent intent;
-                if (settings.getBoolean(SETTINGS_LOGGED_IN_TAG, false)) {
+                if (prefs.getBoolean(SETTINGS_LOGGED_IN_TAG, false)) {
                    intent = new Intent(mContext, MainActivity.class);
                 } else {
                    intent = new Intent(mContext, AuthenticationActivity.class);
                 }
 
                 mContext.startActivity(intent);
+                finish();
             }
         }, 3500);
     }

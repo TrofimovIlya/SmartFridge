@@ -6,6 +6,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -69,9 +70,10 @@ public class AuthenticationActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1 && resultCode == RESULT_OK) {
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
             String accountName = data.getStringExtra(AccountManager.KEY_ACCOUNT_NAME);
-            SharedPreferences mySharedPreferences = getPreferences(0);
-            SharedPreferences.Editor editor = mySharedPreferences.edit();
+            //SharedPreferences mySharedPreferences = getPreferences(0);
+            SharedPreferences.Editor editor = prefs.edit();
             editor.putBoolean(SETTINGS_LOGGED_IN_TAG,true);
             editor.putString(GMAIL, accountName);
             editor.commit();

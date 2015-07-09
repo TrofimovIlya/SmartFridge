@@ -1,6 +1,9 @@
 package ru.hse.smartrefrigerator.activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.media.AudioFormat;
 import android.media.Image;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
@@ -8,10 +11,13 @@ import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.ibm.watson.developer_cloud.speech_to_text.v1.SpeechToText;
 import com.ibm.watson.developer_cloud.speech_to_text.v1.model.SpeechResults;
@@ -28,10 +34,10 @@ public class InputProductActivity extends Activity {
 
     private void startRecording(){
         recordFileName = Environment.getExternalStorageDirectory().getAbsolutePath();
-        recordFileName += "/audiorecordtest.3gp";
+        recordFileName += "/audiorecordtest.pcm";
         mRecorder = new MediaRecorder();
         mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-        mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+        mRecorder.setOutputFormat(AudioFormat.ENCODING_PCM_16BIT);
         mRecorder.setOutputFile(recordFileName);
         mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
         try {
@@ -44,9 +50,13 @@ public class InputProductActivity extends Activity {
     }
 
     private void stopRecording(){
-        mRecorder.stop();
-        mRecorder.release();
-        mRecorder = null;
+        try {
+            mRecorder.stop();
+            mRecorder.release();
+            mRecorder = null;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     private void startPlaying() {
@@ -55,11 +65,12 @@ public class InputProductActivity extends Activity {
             mPlayer.setDataSource(recordFileName);
             mPlayer.prepare();
             mPlayer.start();
+
         } catch (IOException e) {
             Log.e("RECORD", "prepare() failed");
         }
         finally {
-            stopPlaying();
+            //stopPlaying();
         }
     }
 
@@ -76,7 +87,28 @@ public class InputProductActivity extends Activity {
         startRecordVoice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               startRecording();
+                AlertDialog.Builder aBuilder = new AlertDialog.Builder(InputProductActivity.this);
+                AlertDialog alert = aBuilder.create();
+                LayoutInflater inflater = getLayoutInflater();
+                View dialogView = inflater.inflate(R.layout.record_dialog_layout, null);
+                aBuilder.setView(dialogView);
+                aBuilder.setCancelable(false);
+                aBuilder.setNeutralButton("Стоп", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        stopRecording();
+                    }
+                });
+                aBuilder.setCancelable(false);
+                aBuilder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        stopRecording();
+                    }
+                });
+                aBuilder.show();
+
+                startRecording();
             }
         });
 
@@ -84,13 +116,23 @@ public class InputProductActivity extends Activity {
         stopRecordVoice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                stopRecording();
-                SpeechToText service = new SpeechToText();
-                service.setUsernameAndPassword("<username>", "<password>");
-
-                File audio = new File(recordFileName);
-                //SpeechResults transcript = service.recognize(audio, "audio/l16; rate=44100");
+                //stopRecording();
+//                final SpeechToText service = new SpeechToText();
+//                service.setUsernameAndPassword("2f23219b-51db-4b8a-925b-8dc0692cb2cc", "yaajYVcCmuYY");
+//
+//                final File audio = new File(recordFileName);
+//                new Thread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        SpeechResults transcript = service.recognize(audio, "audio/l16; rate=44100");
+//
+//                        Toast.makeText(InputProductActivity.this,transcript.toString(),Toast.LENGTH_SHORT);
+//                        startPlaying();
+//                    }
+//                }).start();
                 startPlaying();
+
+
 
 
 
