@@ -78,7 +78,7 @@ public class AuthenticationActivity extends Activity {
             editor.putString(GMAIL, accountName);
             editor.commit();
 
-            Intent go = new Intent(getApplicationContext(), InputProductActivity.class);
+            Intent go = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(go);
 
 

@@ -117,19 +117,19 @@ public class InputProductActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //stopRecording();
-//                final SpeechToText service = new SpeechToText();
-//                service.setUsernameAndPassword("2f23219b-51db-4b8a-925b-8dc0692cb2cc", "yaajYVcCmuYY");
-//
-//                final File audio = new File(recordFileName);
-//                new Thread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        SpeechResults transcript = service.recognize(audio, "audio/l16; rate=44100");
-//
-//                        Toast.makeText(InputProductActivity.this,transcript.toString(),Toast.LENGTH_SHORT);
-//                        startPlaying();
-//                    }
-//                }).start();
+                final SpeechToText service = new SpeechToText();
+                service.setUsernameAndPassword("2f23219b-51db-4b8a-925b-8dc0692cb2cc", "yaajYVcCmuYY");
+
+                final File audio = new File(recordFileName);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        SpeechResults transcript = service.recognize(audio, "audio/l16; rate=44100");
+
+                        Toast.makeText(InputProductActivity.this,transcript.toString(),Toast.LENGTH_SHORT);
+                        startPlaying();
+                    }
+                }).start();
                 startPlaying();
 
 

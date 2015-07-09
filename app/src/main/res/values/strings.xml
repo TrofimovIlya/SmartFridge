@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">SmartRefrigerator</string>
+    <string name="app_name">Smart Refrigerator</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_splash_screen">SplashScreenActivity</string>
     <string name="title_activity_authentication">AuthenticationActivity</string>
+
     <string name="logo">Logo will be here</string>
     <string name="title_activity_input_product">InputProductActivity</string>
+    <string name="title_activity_main">Мой холодильник</string>
+    <string name="undo">Отмена</string>
+    <string name="item_deleted">Продукт удален из вашего холодильника</string>
 
 </resources>
