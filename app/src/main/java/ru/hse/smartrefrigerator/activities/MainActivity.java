@@ -7,13 +7,13 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import butterknife.ButterKnife;
 
+import com.android.volley.toolbox.Volley;
 import com.melnykov.fab.FloatingActionButton;
 import com.nispok.snackbar.Snackbar;
 import com.nispok.snackbar.SnackbarManager;
@@ -25,6 +25,11 @@ import ru.hse.smartrefrigerator.controllers.ProductDataProvider;
 import ru.hse.smartrefrigerator.fragments.AddressesDataProviderFragment;
 import ru.hse.smartrefrigerator.fragments.SwipeableProductListFragment;
 import ru.hse.smartrefrigerator.models.Product;
+import ru.hse.smartrefrigerator.net.OnProductsGetCallback;
+import ru.hse.smartrefrigerator.net.ProductListTransmission;
+
+import java.sql.Date;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements DataMarkerInterface, SwipeableProductListFragment.OnCompleteListener {
@@ -147,11 +152,19 @@ public class MainActivity extends AppCompatActivity implements DataMarkerInterfa
     public void onSwipeableComplete() {
         // load items here
 
-        for (int i = 0; i < 20; i++) {
-            getDataProvider().addProduct(new Product("ProductName " + i));
-        }
+        ProductListTransmission.getByID(Volley.newRequestQueue(this), "319102857017fa5ae96a92166316764b4ec2e85c", new OnProductsGetCallback() {
+            @Override
+            public void onGet(List<Product> products) {
+                for (int i = 0; i < products.size(); i++) {
+                    getDataProvider().addProduct(products.get(i));
+                }
 
-        refreshRV();
+                refreshRV();
+
+            }
+
+        });
+
     }
 
     @Override
@@ -161,12 +174,14 @@ public class MainActivity extends AppCompatActivity implements DataMarkerInterfa
         return true;
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
