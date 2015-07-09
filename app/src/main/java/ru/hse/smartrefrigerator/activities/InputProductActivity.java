@@ -1,5 +1,6 @@
 package ru.hse.smartrefrigerator.activities;
 
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -8,6 +9,7 @@ import android.media.Image;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Environment;
+import android.os.Looper;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,15 +28,17 @@ import java.io.File;
 import java.io.IOException;
 
 import ru.hse.smartrefrigerator.R;
+import ru.hse.smartrefrigerator.audio.PcmAudioHelper;
+import ru.hse.smartrefrigerator.audio.WavAudioFormat;
 
 public class InputProductActivity extends Activity {
     String recordFileName;
     MediaRecorder mRecorder;
     MediaPlayer mPlayer;
-
+    String resultAudio = Environment.getExternalStorageDirectory().getAbsolutePath() + "/result.wav";
     private void startRecording(){
         recordFileName = Environment.getExternalStorageDirectory().getAbsolutePath();
-        recordFileName += "/audiorecordtest.pcm";
+        recordFileName += "/audiorecordtest";
         mRecorder = new MediaRecorder();
         mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         mRecorder.setOutputFormat(AudioFormat.ENCODING_PCM_16BIT);
@@ -68,6 +72,8 @@ public class InputProductActivity extends Activity {
 
         } catch (IOException e) {
             Log.e("RECORD", "prepare() failed");
+            mPlayer.release();
+            mPlayer = null;
         }
         finally {
             //stopPlaying();
@@ -78,6 +84,8 @@ public class InputProductActivity extends Activity {
         mPlayer.release();
         mPlayer = null;
     }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,10 +132,19 @@ public class InputProductActivity extends Activity {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        SpeechResults transcript = service.recognize(audio, "audio/l16; rate=44100");
+                        WavAudioFormat format = WavAudioFormat.wavFormat(44100,16,2);
+                        try {
+                            PcmAudioHelper.convertRawToWav(format, new File(recordFileName), new File(resultAudio));
+                        }catch (Exception e){
+                            e.printStackTrace();
+                            Toast.makeText(InputProductActivity.this,"ERROR",Toast.LENGTH_SHORT);
+                        }
 
-                        Toast.makeText(InputProductActivity.this,transcript.toString(),Toast.LENGTH_SHORT);
-                        startPlaying();
+                        Looper.prepare();
+                        SpeechResults transcript = service.recognize(new File(resultAudio), "audio/l16; rate=44100");
+                        String temp = transcript.toString();
+                        Toast.makeText(InputProductActivity.this,transcript.toString(),Toast.LENGTH_SHORT).show();
+                        //startPlaying();
                     }
                 }).start();
                 startPlaying();
