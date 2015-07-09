@@ -2,8 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="ru.hse.smartrefrigerator.activities.InputProductActivity"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -17,7 +16,7 @@
             android:layout_height="fill_parent"
             android:id="@+id/bVoiceRecorder"
             android:layout_weight="1"
-            />
+          />
 
         <View
             android:layout_width="2dp"
