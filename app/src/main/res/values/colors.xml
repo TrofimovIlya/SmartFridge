@@ -15,5 +15,6 @@
     <color name="bg_item_normal_pressed_state">#ffe0e0e0</color>
     <color name="bg_swipe_item">#fb3f1c</color>
     <color name="snackbar_action_color_done">#ffccccff</color>
+    <color name="snackbar_undo_color">#FFEB3B</color>
     <color name="ripple_item_normal_state">#80666666</color>
 </resources>
