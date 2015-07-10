@@ -21,6 +21,7 @@
                 android:background="#e7e7e7"/>
 
         <com.melnykov.fab.FloatingActionButton
+                android:visibility="invisible"
                 android:id="@+id/fab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -30,5 +31,18 @@
                 app:fab_colorNormal="@color/accent"
                 app:fab_colorPressed="@color/accent"
                 app:fab_colorRipple="@color/icons"/>
+
+        <com.dd.CircularProgressButton
+                android:id="@+id/circularButton1"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_gravity="bottom|right"
+                android:layout_margin="@dimen/activity_horizontal_margin"
+                android:textColor="@color/accent"
+                android:textSize="18sp"
+                app:cpb_cornerRadius="56dp"
+                app:cpb_iconComplete="@drawable/ic_check_24dp"
+                app:cpb_iconError="@drawable/ic_close_24dp"
+                app:cpb_textIdle="@string/hello_world"/>
     </FrameLayout>
 </LinearLayout>

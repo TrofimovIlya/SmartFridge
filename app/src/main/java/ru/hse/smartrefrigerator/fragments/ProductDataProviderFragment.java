@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import ru.hse.smartrefrigerator.controllers.ProductDataProvider;
 
-public class AddressesDataProviderFragment extends Fragment {
+public class ProductDataProviderFragment extends Fragment {
     private ProductDataProvider mDataProvider;
 
     @Override

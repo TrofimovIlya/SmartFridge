@@ -22,13 +22,12 @@ import com.nispok.snackbar.listeners.ActionClickListener;
 import ru.hse.smartrefrigerator.R;
 import ru.hse.smartrefrigerator.controllers.DataMarkerInterface;
 import ru.hse.smartrefrigerator.controllers.ProductDataProvider;
-import ru.hse.smartrefrigerator.fragments.AddressesDataProviderFragment;
+import ru.hse.smartrefrigerator.fragments.ProductDataProviderFragment;
 import ru.hse.smartrefrigerator.fragments.SwipeableProductListFragment;
 import ru.hse.smartrefrigerator.models.Product;
 import ru.hse.smartrefrigerator.net.OnProductsGetCallback;
 import ru.hse.smartrefrigerator.net.ProductListTransmission;
 
-import java.sql.Date;
 import java.util.List;
 
 
@@ -47,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements DataMarkerInterfa
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(new AddressesDataProviderFragment(), FRAGMENT_TAG_DATA_PROVIDER)
+                    .add(new ProductDataProviderFragment(), FRAGMENT_TAG_DATA_PROVIDER)
                     .commit();
 
             getSupportFragmentManager().beginTransaction()
@@ -145,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements DataMarkerInterfa
     @Override
     public ProductDataProvider getDataProvider() {
         final Fragment fragment = getSupportFragmentManager().findFragmentByTag(FRAGMENT_TAG_DATA_PROVIDER);
-        return ((AddressesDataProviderFragment) fragment).getDataProvider();
+        return ((ProductDataProviderFragment) fragment).getDataProvider();
     }
 
     @Override

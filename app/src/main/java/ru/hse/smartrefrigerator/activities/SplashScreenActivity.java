@@ -10,9 +10,9 @@ import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import ru.hse.smartrefrigerator.R;
+import ru.hse.smartrefrigerator.utils.PreferencesConsts;
 
 public class SplashScreenActivity extends Activity {
-    private static final String SETTINGS_LOGGED_IN_TAG = "LOGGED_IN";
     protected Context mContext;
 
 
@@ -28,10 +28,9 @@ public class SplashScreenActivity extends Activity {
 
         new Handler().postDelayed(new Runnable() {
             public void run() {
-                //SharedPreferences settings = getPreferences(0);
 
                 Intent intent;
-                if (prefs.getBoolean(SETTINGS_LOGGED_IN_TAG, false)) {
+                if (prefs.getString(PreferencesConsts.USER_ID, "").length() > 0) {
                    intent = new Intent(mContext, MainActivity.class);
                 } else {
                    intent = new Intent(mContext, AuthenticationActivity.class);
@@ -40,7 +39,7 @@ public class SplashScreenActivity extends Activity {
                 mContext.startActivity(intent);
                 finish();
             }
-        }, 3500);
+        }, 2200);
     }
 
     @Override

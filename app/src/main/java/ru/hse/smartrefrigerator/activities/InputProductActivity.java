@@ -3,60 +3,76 @@ package ru.hse.smartrefrigerator.activities;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.media.AudioFormat;
-import android.media.Image;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
-import android.os.Environment;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.ibm.watson.developer_cloud.speech_to_text.v1.SpeechToText;
 import com.ibm.watson.developer_cloud.speech_to_text.v1.model.SpeechResults;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 
 import ru.hse.smartrefrigerator.R;
+import ru.hse.smartrefrigerator.controllers.AudioReciever;
 
 public class InputProductActivity extends Activity {
     String recordFileName;
     MediaRecorder mRecorder;
     MediaPlayer mPlayer;
+    AudioReciever mReciever;
 
-    private void startRecording(){
-        recordFileName = Environment.getExternalStorageDirectory().getAbsolutePath();
-        recordFileName += "/audiorecordtest.pcm";
-        mRecorder = new MediaRecorder();
-        mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-        mRecorder.setOutputFormat(AudioFormat.ENCODING_PCM_16BIT);
-        mRecorder.setOutputFile(recordFileName);
-        mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-        try {
-            mRecorder.prepare();
-        } catch (IOException e) {
-            Log.e("RECORD", "prepare() failed");
+    public void writeFile(short[] data, String fileName) throws IOException {
+        DataOutputStream doStream = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(fileName)));
+        doStream.writeInt(data.length); //Save size
+        for (int i = 0; i < data.length; i++) {
+            doStream.writeShort(data[i]); //Save each number
         }
 
-        mRecorder.start();
+        doStream.flush();
+        doStream.close();
     }
 
-    private void stopRecording(){
-        try {
-            mRecorder.stop();
-            mRecorder.release();
-            mRecorder = null;
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+    private void startRecording() {
+//        recordFileName = Environment.getExternalStorageDirectory().getAbsolutePath();
+//        recordFileName += "/audiorecordtest.wav";
+        mReciever = new AudioReciever();
+
+        mReciever.startRecording();
+
+
+
+//        mRecorder = new MediaRecorder();
+//        mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+//        mRecorder.setAudioSamplingRate(44100);
+//        mRecorder.setAudioEncodingBitRate(16);
+//        mRecorder.setOutputFormat(AudioFormat.ENCODING_PCM_16BIT);
+//        mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.);
+//        mRecorder.setOutputFile(recordFileName);
+//        try {
+//            mRecorder.prepare();
+//        } catch (IOException e) {
+//            Log.e("RECORD", "prepare() failed");
+//        }
+//
+//        mRecorder.start();
+    }
+
+    private void stopRecording() {
+        mReciever.stopRecording();
+
+//        try {
+//            mRecorder.stop();
+//            mRecorder.release();
+//            mRecorder = null;
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     private void startPlaying() {
@@ -68,8 +84,7 @@ public class InputProductActivity extends Activity {
 
         } catch (IOException e) {
             Log.e("RECORD", "prepare() failed");
-        }
-        finally {
+        } finally {
             //stopPlaying();
         }
     }
@@ -78,12 +93,13 @@ public class InputProductActivity extends Activity {
         mPlayer.release();
         mPlayer = null;
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input_product);
 
-        final ImageButton startRecordVoice = (ImageButton)findViewById(R.id.bVoiceRecorder);
+        final ImageButton startRecordVoice = (ImageButton) findViewById(R.id.bVoiceRecorder);
         startRecordVoice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,7 +128,8 @@ public class InputProductActivity extends Activity {
             }
         });
 
-        ImageButton stopRecordVoice = (ImageButton)findViewById(R.id.bCodeScanner);
+
+        ImageButton stopRecordVoice = (ImageButton) findViewById(R.id.bCodeScanner);
         stopRecordVoice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,27 +137,21 @@ public class InputProductActivity extends Activity {
                 final SpeechToText service = new SpeechToText();
                 service.setUsernameAndPassword("2f23219b-51db-4b8a-925b-8dc0692cb2cc", "yaajYVcCmuYY");
 
-                final File audio = new File(recordFileName);
+                final File audio = new File(mReciever.getFileName());
+
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
                         SpeechResults transcript = service.recognize(audio, "audio/l16; rate=44100");
 
-                        Toast.makeText(InputProductActivity.this,transcript.toString(),Toast.LENGTH_SHORT);
-                        startPlaying();
+                        System.out.println(transcript.toString());
+                        //startPlaying();
                     }
                 }).start();
-                startPlaying();
-
-
-
-
-
-
+               // startPlaying();
             }
         });
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
