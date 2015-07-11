@@ -13,6 +13,9 @@ import com.h6ah4i.android.widget.advrecyclerview.swipeable.RecyclerViewSwipeMana
 import com.h6ah4i.android.widget.advrecyclerview.swipeable.SwipeableItemAdapter;
 import com.h6ah4i.android.widget.advrecyclerview.utils.AbstractSwipeableItemViewHolder;
 import com.h6ah4i.android.widget.advrecyclerview.utils.RecyclerViewAdapterUtils;
+
+import java.text.SimpleDateFormat;
+
 import ru.hse.smartrefrigerator.R;
 import ru.hse.smartrefrigerator.controllers.AbstractDataProvider;
 
@@ -40,12 +43,14 @@ public class SwipeableProductItemAdapter
         public View mDragHandle;
         public TextView mTextViewName;
         public ImageView mImageViewIcon;
+        public TextView mTextViewDate;
 
         public MyViewHolder(View v) {
             super(v);
             mContainer = (ViewGroup) v.findViewById(R.id.container);
             mDragHandle = v.findViewById(R.id.drag_handle);
             mTextViewName = (TextView) v.findViewById(R.id.tv_product_name);
+            mTextViewDate = (TextView) v.findViewById(R.id.tv_date);
             mImageViewIcon = (ImageView) v.findViewById(R.id.iv_roundedIcon);
 
             mDragHandle.setVisibility(View.GONE);  // hide the drag handle
@@ -116,11 +121,16 @@ public class SwipeableProductItemAdapter
 
         String name = item.getProduct().getName();
 
+        SimpleDateFormat ddMMMMyyFormat = new SimpleDateFormat("EEEE, dd MMMM yyyy");
+        String expDate = ddMMMMyyFormat.format(item.getProduct().getExpirationDate());
+
         // set text
-        holder.mTextViewName.setText(name);
+
 
         String symbol = (name == null || name.length() < 1) ? "#" : name.substring(0, 1).toUpperCase();
-        holder.mImageViewIcon.setImageDrawable(TextDrawable.builder().buildRound(symbol, ColorGenerator.MATERIAL.getColor(name)));
+        holder.mImageViewIcon.setImageDrawable(TextDrawable.builder().buildRound(symbol, ColorGenerator.MATERIAL.getColor(name + expDate)));
+        holder.mTextViewName.setText(name);
+        holder.mTextViewDate.setText("Употребить до: " + expDate);
 
         // set background resource (target view ID: container)
         final int swipeState = holder.getSwipeStateFlags();

@@ -12,7 +12,9 @@
 
     <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:clipChildren="false"
+            android:id="@+id/frame">
 
         <RelativeLayout
                 android:id="@+id/container"
@@ -20,29 +22,32 @@
                 android:layout_height="match_parent"
                 android:background="#e7e7e7"/>
 
-        <com.melnykov.fab.FloatingActionButton
-                android:visibility="invisible"
-                android:id="@+id/fab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|right"
-                android:layout_margin="@dimen/activity_horizontal_margin"
-                android:src="@drawable/ic_plus_24dp"
-                app:fab_colorNormal="@color/accent"
-                app:fab_colorPressed="@color/accent"
-                app:fab_colorRipple="@color/icons"/>
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fab"
+            android:layout_gravity="bottom|right"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="5dp"
+            app:fab_icon="@drawable/ic_microphone_24dp"
+            app:fab_colorNormal="@color/accent"
+            app:fab_size="normal"
+            app:fab_colorPressed="@color/accent"/>
+
 
         <com.dd.CircularProgressButton
                 android:id="@+id/circularButton1"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
+                android:layout_width="58dp"
+                android:layout_height="58dp"
                 android:layout_gravity="bottom|right"
                 android:layout_margin="@dimen/activity_horizontal_margin"
-                android:textColor="@color/accent"
-                android:textSize="18sp"
+                app:cpb_colorIndicator="@color/icons"
+                app:cpb_colorProgress="@color/accent"
+                app:cpb_colorIndicatorBackground="@color/accent"
+                app:cpb_selectorIdle="@drawable/fab_selector"
                 app:cpb_cornerRadius="56dp"
+                app:cpb_selectorComplete="@drawable/fab_selector_cmpl"
                 app:cpb_iconComplete="@drawable/ic_check_24dp"
-                app:cpb_iconError="@drawable/ic_close_24dp"
-                app:cpb_textIdle="@string/hello_world"/>
+                app:cpb_iconError="@drawable/ic_close_24dp"/>
     </FrameLayout>
 </LinearLayout>

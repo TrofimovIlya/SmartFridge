@@ -6,7 +6,6 @@ import java.util.Date;
  * Created by KingUrgot on 08.07.2015.
  */
 public class Product {
-
     String name;
     Date expirationDate;
 

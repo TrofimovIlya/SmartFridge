@@ -15,20 +15,16 @@ import ru.hse.smartrefrigerator.utils.PreferencesConsts;
 public class SplashScreenActivity extends Activity {
     protected Context mContext;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
         setContentView(R.layout.activity_splash_screen);
         mContext = this;
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-
         new Handler().postDelayed(new Runnable() {
             public void run() {
-
                 Intent intent;
                 if (prefs.getString(PreferencesConsts.USER_ID, "").length() > 0) {
                    intent = new Intent(mContext, MainActivity.class);

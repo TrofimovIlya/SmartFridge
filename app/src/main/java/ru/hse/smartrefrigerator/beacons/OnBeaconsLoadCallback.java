@@ -1,7 +1,7 @@
+package ru.hse.smartrefrigerator.beacons;
 
-package ru.hse.smartrefrigerator.net;
 
-        import java.util.List;
+import java.util.List;
 
 /**
  * Created by KingUrgot on 09.07.2015.

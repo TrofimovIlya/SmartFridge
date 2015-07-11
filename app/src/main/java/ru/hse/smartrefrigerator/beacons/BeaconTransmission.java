@@ -1,4 +1,5 @@
-package ru.hse.smartrefrigerator.net;
+package ru.hse.smartrefrigerator.beacons;
+
 
 import android.util.Log;
 
@@ -95,13 +96,13 @@ public class BeaconTransmission {
                         JsonObject jo = (JsonObject)jsonParser.parse(resp);
                         JsonArray jarr = jo.getAsJsonArray("object");
 
-                        List<BeaconMark> beacons = new ArrayList<BeaconMark>();
+                        List<BeaconMark> beacons = new ArrayList<>();
 
                         for (JsonElement jEl : jarr) {
                             JsonObject jBeacon = jEl.getAsJsonObject().getAsJsonObject("attributes");
-                            String uId = jBeacon.getAsJsonPrimitive("uID").getAsString();
+                            Integer uId = jBeacon.getAsJsonPrimitive("uID").getAsInt();
 
-                            List<String> products = new ArrayList<String>();
+                            List<String> products = new ArrayList<>();
                             JsonArray jProducts = jBeacon.getAsJsonArray("productList");
                             for (JsonElement jStr : jProducts) {
                                 products.add(jStr.getAsString());

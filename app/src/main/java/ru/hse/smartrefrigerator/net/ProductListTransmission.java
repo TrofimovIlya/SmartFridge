@@ -61,7 +61,7 @@ public class ProductListTransmission {
                         String version = jo.getAsJsonPrimitive("version").getAsString();
                         JsonArray prodList = jo.getAsJsonArray("attributes");
 
-                        List<Product> resultList = new ArrayList<Product>();
+                        ArrayList<Product> resultList = new ArrayList<Product>();
                         Gson gson = new Gson();
                         for (JsonElement product : prodList) {
                             Product p = gson.fromJson(product, Product.class);
@@ -75,7 +75,7 @@ public class ProductListTransmission {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.i("tag", error.getMessage());
+                Log.i("tag", "kek");
             }
         }) {
             @Override

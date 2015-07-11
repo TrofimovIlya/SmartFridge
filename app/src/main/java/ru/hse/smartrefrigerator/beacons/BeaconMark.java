@@ -1,4 +1,4 @@
-package ru.hse.smartrefrigerator.net;
+package ru.hse.smartrefrigerator.beacons;
 
 import java.util.List;
 
@@ -6,19 +6,19 @@ import java.util.List;
  * Created by KingUrgot on 09.07.2015.
  */
 public class BeaconMark {
-    String uID;
+    Integer uID;
     List<String> productList;
 
-    public BeaconMark(List<String> productList, String uID) {
+    public BeaconMark(List<String> productList, Integer uID) {
         this.productList = productList;
         this.uID = uID;
     }
 
-    public String getuID() {
+    public Integer getuID() {
         return uID;
     }
 
-    public void setuID(String uID) {
+    public void setuID(Integer uID) {
         this.uID = uID;
     }
 

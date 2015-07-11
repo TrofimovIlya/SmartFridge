@@ -15,6 +15,8 @@ import android.widget.ImageButton;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.common.AccountPicker;
+//import com.google.android.gms.auth.GoogleAuthUtil;
+//import com.google.android.gms.common.AccountPicker;
 
 import ru.hse.smartrefrigerator.R;
 import ru.hse.smartrefrigerator.models.Product;
@@ -74,24 +76,18 @@ public class AuthenticationActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1 && resultCode == RESULT_OK) {
-
-            String accountName = data.getStringExtra(AccountManager.KEY_ACCOUNT_NAME);
-
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-            final SharedPreferences.Editor editor = prefs.edit();
-            editor.putString(PreferencesConsts.GMAIL, accountName);
-            editor.commit();
-
             ProductListTransmission.addList(new ArrayList<Product>(), Volley.newRequestQueue(this), new OnProductModifyCallback() {
                 @Override
                 public void onModify(String id, String version) {
+                    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(AuthenticationActivity.this);
+                    SharedPreferences.Editor editor = prefs.edit();
 
-                    System.out.println(id + " " + version);
+                    editor.putString(PreferencesConsts.LIST_VERSION, version);
+                    editor.putString(PreferencesConsts.USER_ID, id);
 
+                    editor.commit();
                 }
             });
-
-            System.out.println("here");
 
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
         }
