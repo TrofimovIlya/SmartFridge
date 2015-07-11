@@ -93,6 +93,7 @@ public class ProductDataProvider extends AbstractDataProvider {
         }
     }
 
+
     @Override
     public void moveItem(int fromPosition, int toPosition) {
         if (fromPosition == toPosition) {

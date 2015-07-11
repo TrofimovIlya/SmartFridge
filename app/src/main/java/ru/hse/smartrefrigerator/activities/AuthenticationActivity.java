@@ -12,23 +12,29 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.common.AccountPicker;
+//import com.google.android.gms.auth.GoogleAuthUtil;
+//import com.google.android.gms.common.AccountPicker;
 
 import ru.hse.smartrefrigerator.R;
+import ru.hse.smartrefrigerator.models.Product;
+import ru.hse.smartrefrigerator.net.OnProductModifyCallback;
+import ru.hse.smartrefrigerator.net.ProductListTransmission;
+import ru.hse.smartrefrigerator.utils.PreferencesConsts;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AuthenticationActivity extends Activity {
-
-    private static final String SETTINGS_LOGGED_IN_TAG = "LOGGED_IN";
-    private static final String GMAIL = "login";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authentication);
 
-        ImageButton bLoginGPlus = (ImageButton)findViewById(R.id.bLoginGPlus);
-        if(bLoginGPlus != null) {
+        ImageButton bLoginGPlus = (ImageButton) findViewById(R.id.bLoginGPlus);
+        if (bLoginGPlus != null) {
             bLoginGPlus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -70,18 +76,20 @@ public class AuthenticationActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1 && resultCode == RESULT_OK) {
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-            String accountName = data.getStringExtra(AccountManager.KEY_ACCOUNT_NAME);
-            //SharedPreferences mySharedPreferences = getPreferences(0);
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putBoolean(SETTINGS_LOGGED_IN_TAG,true);
-            editor.putString(GMAIL, accountName);
-            editor.commit();
+            ProductListTransmission.addList(new ArrayList<Product>(), Volley.newRequestQueue(this), new OnProductModifyCallback() {
+                @Override
+                public void onModify(String id, String version) {
+                    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(AuthenticationActivity.this);
+                    SharedPreferences.Editor editor = prefs.edit();
 
-            Intent go = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(go);
+                    editor.putString(PreferencesConsts.LIST_VERSION, version);
+                    editor.putString(PreferencesConsts.USER_ID, id);
 
+                    editor.commit();
+                }
+            });
 
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
         }
     }
 }

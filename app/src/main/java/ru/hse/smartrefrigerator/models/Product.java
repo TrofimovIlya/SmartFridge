@@ -1,11 +1,17 @@
 package ru.hse.smartrefrigerator.models;
 
+import java.util.Date;
+
 /**
- * @author Ilya Trofimov
+ * Created by KingUrgot on 08.07.2015.
  */
 public class Product {
-    public Product(String name) {
+    String name;
+    Date expirationDate;
+
+    public Product(String name, Date expirationDate) {
         this.name = name;
+        this.expirationDate = expirationDate;
     }
 
     public String getName() {
@@ -16,7 +22,16 @@ public class Product {
         this.name = name;
     }
 
-    private String name;
+    public Date getExpirationDate() {
+        return expirationDate;
+    }
 
-    // TODO Date
+    public void setExpirationDate(Date expiretionDate) {
+        this.expirationDate = expiretionDate;
+    }
+
+    @Override
+    public String toString() {
+        return name + " expires at " + expirationDate;
+    }
 }
