@@ -27,9 +27,9 @@ public class SplashScreenActivity extends Activity {
             public void run() {
                 Intent intent;
                 if (prefs.getString(PreferencesConsts.USER_ID, "").length() > 0) {
-                   intent = new Intent(mContext, MainActivity.class);
+                    intent = new Intent(mContext, MainActivity.class);
                 } else {
-                   intent = new Intent(mContext, AuthenticationActivity.class);
+                    intent = new Intent(mContext, AuthenticationActivity.class);
                 }
 
                 mContext.startActivity(intent);
@@ -53,7 +53,7 @@ public class SplashScreenActivity extends Activity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.home) {
             return true;
         }
 

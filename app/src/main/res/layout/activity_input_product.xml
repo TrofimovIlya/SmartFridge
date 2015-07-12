@@ -1,49 +1,50 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="ru.hse.smartrefrigerator.activities.InputProductActivity"
-    android:orientation="vertical">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              tools:context="ru.hse.smartrefrigerator.activities.InputProductActivity"
+              android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
-        android:background="#FFF"
-        android:orientation="horizontal">
-
-        <ImageButton
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:id="@+id/bVoiceRecorder"
             android:layout_weight="1"
-            android:src="@drawable/ic_mic"
-            />
+            android:background="#FFF"
+            android:orientation="horizontal">
+
+        <ImageButton
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/bVoiceRecorder"
+                android:layout_weight="1"
+                android:src="@drawable/ic_mic"
+                />
         <View
-            android:layout_width="2dp"
-            android:layout_height="fill_parent"
-            android:background="#FF0000FF" />
+                android:layout_width="2dp"
+                android:layout_height="fill_parent"
+                android:background="#FF0000FF"/>
 
         <ImageButton
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/bCodeScanner"
-            android:layout_weight="1"
-            android:src="@drawable/ic_code"/>
-        </LinearLayout>
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/bCodeScanner"
+                android:layout_weight="1"
+                android:src="@drawable/ic_code"/>
+    </LinearLayout>
 
 
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="2"
-        android:background="#000">
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="2"
+            android:background="#000">
 
         <FrameLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
 
-            </FrameLayout>
+        </FrameLayout>
 
 
-        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>

@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="24dp"
-    android:paddingRight="24dp"
-    android:paddingTop="16dp">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:paddingLeft="24dp"
+              android:paddingRight="24dp"
+              android:paddingTop="16dp">
 
     <com.rengwuxian.materialedittext.MaterialEditText
-        android:id="@+id/et_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/product_name"
-        android:imeOptions="flagNoExtractUi"
-        android:textCursorDrawable="@drawable/cursor"
-        app:met_singleLineEllipsis="true"
-        app:met_floatingLabel="normal"
-        />
+            android:id="@+id/et_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/product_name"
+            android:imeOptions="flagNoExtractUi"
+            android:textCursorDrawable="@drawable/cursor"
+            app:met_singleLineEllipsis="true"
+            app:met_floatingLabel="normal"
+            />
 
     <com.rengwuxian.materialedittext.MaterialEditText
-        android:id="@+id/et_date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/date"
-        android:imeOptions="flagNoExtractUi"
-        android:textCursorDrawable="@drawable/cursor"
-        app:met_singleLineEllipsis="true"
-        app:met_floatingLabel="normal"/>
+            android:id="@+id/et_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/date"
+            android:imeOptions="flagNoExtractUi"
+            android:textCursorDrawable="@drawable/cursor"
+            app:met_singleLineEllipsis="true"
+            app:met_floatingLabel="normal"/>
 </LinearLayout>

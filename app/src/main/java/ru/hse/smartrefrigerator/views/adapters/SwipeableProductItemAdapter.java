@@ -13,11 +13,10 @@ import com.h6ah4i.android.widget.advrecyclerview.swipeable.RecyclerViewSwipeMana
 import com.h6ah4i.android.widget.advrecyclerview.swipeable.SwipeableItemAdapter;
 import com.h6ah4i.android.widget.advrecyclerview.utils.AbstractSwipeableItemViewHolder;
 import com.h6ah4i.android.widget.advrecyclerview.utils.RecyclerViewAdapterUtils;
-
-import java.text.SimpleDateFormat;
-
 import ru.hse.smartrefrigerator.R;
 import ru.hse.smartrefrigerator.controllers.AbstractDataProvider;
+
+import java.text.SimpleDateFormat;
 
 /**
  * @author Ilya Trofimov
@@ -31,36 +30,6 @@ public class SwipeableProductItemAdapter
     private EventListener mEventListener;
     private View.OnClickListener mItemViewOnClickListener;
     private View.OnClickListener mSwipeableViewContainerOnClickListener;
-
-    public interface EventListener {
-        void onItemRemoved(int position);
-
-        void onItemViewClicked(View v);
-    }
-
-    public static class MyViewHolder extends AbstractSwipeableItemViewHolder {
-        public ViewGroup mContainer;
-        public View mDragHandle;
-        public TextView mTextViewName;
-        public ImageView mImageViewIcon;
-        public TextView mTextViewDate;
-
-        public MyViewHolder(View v) {
-            super(v);
-            mContainer = (ViewGroup) v.findViewById(R.id.container);
-            mDragHandle = v.findViewById(R.id.drag_handle);
-            mTextViewName = (TextView) v.findViewById(R.id.tv_product_name);
-            mTextViewDate = (TextView) v.findViewById(R.id.tv_date);
-            mImageViewIcon = (ImageView) v.findViewById(R.id.iv_roundedIcon);
-
-            mDragHandle.setVisibility(View.GONE);  // hide the drag handle
-        }
-
-        @Override
-        public View getSwipeableContainerView() {
-            return mContainer;
-        }
-    }
 
     public SwipeableProductItemAdapter(AbstractDataProvider dataProvider) {
         mProvider = dataProvider;
@@ -210,5 +179,35 @@ public class SwipeableProductItemAdapter
 
     public void setEventListener(EventListener eventListener) {
         mEventListener = eventListener;
+    }
+
+    public interface EventListener {
+        void onItemRemoved(int position);
+
+        void onItemViewClicked(View v);
+    }
+
+    public static class MyViewHolder extends AbstractSwipeableItemViewHolder {
+        public ViewGroup mContainer;
+        public View mDragHandle;
+        public TextView mTextViewName;
+        public ImageView mImageViewIcon;
+        public TextView mTextViewDate;
+
+        public MyViewHolder(View v) {
+            super(v);
+            mContainer = (ViewGroup) v.findViewById(R.id.container);
+            mDragHandle = v.findViewById(R.id.drag_handle);
+            mTextViewName = (TextView) v.findViewById(R.id.tv_product_name);
+            mTextViewDate = (TextView) v.findViewById(R.id.tv_date);
+            mImageViewIcon = (ImageView) v.findViewById(R.id.iv_roundedIcon);
+
+            mDragHandle.setVisibility(View.GONE);  // hide the drag handle
+        }
+
+        @Override
+        public View getSwipeableContainerView() {
+            return mContainer;
+        }
     }
 }

@@ -11,7 +11,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.h6ah4i.android.widget.advrecyclerview.animator.GeneralItemAnimator;
 import com.h6ah4i.android.widget.advrecyclerview.animator.SwipeDismissItemAnimator;
 import com.h6ah4i.android.widget.advrecyclerview.decoration.ItemShadowDecorator;
@@ -34,6 +33,7 @@ public class SwipeableProductListFragment extends Fragment {
     private RecyclerView.Adapter mWrappedAdapter;
     private RecyclerViewSwipeManager mRecyclerViewSwipeManager;
     private RecyclerViewTouchActionGuardManager mRecyclerViewTouchActionGuardManager;
+    private OnCompleteListener mListener;
 
     public SwipeableProductListFragment() {
         super();
@@ -106,7 +106,6 @@ public class SwipeableProductListFragment extends Fragment {
         mListener.onSwipeableComplete();
     }
 
-
     @Override
     public void onDestroyView() {
         if (mRecyclerViewSwipeManager != null) {
@@ -163,13 +162,6 @@ public class SwipeableProductListFragment extends Fragment {
         mRecyclerView.scrollToPosition(position);
     }
 
-
-    public static interface OnCompleteListener {
-        public abstract void onSwipeableComplete();
-    }
-
-    private OnCompleteListener mListener;
-
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
@@ -177,5 +169,9 @@ public class SwipeableProductListFragment extends Fragment {
         } catch (final ClassCastException e) {
             throw new ClassCastException(activity.toString() + " must implement OnCompleteListener");
         }
+    }
+
+    public static interface OnCompleteListener {
+        public abstract void onSwipeableComplete();
     }
 }

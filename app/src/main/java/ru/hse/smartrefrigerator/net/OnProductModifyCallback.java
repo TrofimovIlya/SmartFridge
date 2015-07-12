@@ -1,4 +1,3 @@
-
 package ru.hse.smartrefrigerator.net;
 
 /**

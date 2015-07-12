@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 public class DateParse {
 
-    static String [] numbers = {
+    static String[] numbers = {
             "one",
             "two",
             "three",
@@ -28,7 +28,7 @@ public class DateParse {
     };
 
 
-    static String []  timeUnits = {
+    static String[] timeUnits = {
             "day",
             "days",
             "week",
@@ -78,58 +78,52 @@ public class DateParse {
         dayToInteger.put("year", 360);
 
 
-
         ArrayList<Integer> allNumbers = new ArrayList<Integer>();
         int index = -1;
         int number;
-        for(String temp : numbers) {
+        for (String temp : numbers) {
             index = text.indexOf(temp);
-            if(index > -1) {
+            if (index > -1) {
                 number = stringToInteger.get(temp);
-                if(index + temp.length() < text.length()){
-                    if (text.charAt(index + temp.length()) == ' '){
-                        text = text.replace((text.substring(index, index + temp.length())),"");
+                if (index + temp.length() < text.length()) {
+                    if (text.charAt(index + temp.length()) == ' ') {
+                        text = text.replace((text.substring(index, index + temp.length())), "");
                         allNumbers.add(number);
 
-                    }else {
+                    } else {
                         String we = text.substring(index + temp.length(), index + temp.length() + 4);
-                        if(text.substring(index + temp.length(), index + temp.length() + 4).equals("teen")) {
-                            number +=10;
-                            text = text.replace((text.substring(index, index + temp.length() + 4)),"");
+                        if (text.substring(index + temp.length(), index + temp.length() + 4).equals("teen")) {
+                            number += 10;
+                            text = text.replace((text.substring(index, index + temp.length() + 4)), "");
                             allNumbers.add(number);
 
                         }
-                        if(text.substring(index + temp.length(), index + temp.length() + 2).equals("ty")) {
-                            number *=10;
-                            text = text.replace((text.substring(index, index + temp.length() + 2)),"");
+                        if (text.substring(index + temp.length(), index + temp.length() + 2).equals("ty")) {
+                            number *= 10;
+                            text = text.replace((text.substring(index, index + temp.length() + 2)), "");
                             allNumbers.add(number);
 
                         }
 
                     }
                 }
-            }else {
-                continue;
             }
-
-
         }
 
         int numberOfUnits = 0;
-        for(Integer a : allNumbers){
-            numberOfUnits+=a;
+        for (Integer a : allNumbers) {
+            numberOfUnits += a;
         }
 
         int digitUnit = 1;
-        for(String unit: timeUnits) {
+        for (String unit : timeUnits) {
             int tempIndex = text.indexOf(unit);
-            if(text.indexOf(unit)> -1) {
-
-                if(tempIndex + unit.length() < text.length()){
+            if (text.contains(unit)) {
+                if (tempIndex + unit.length() < text.length()) {
                     digitUnit = dayToInteger.get(unit);
-                    text = text.replace((text.substring(tempIndex, tempIndex + unit.length() + 1)),"");
+                    text = text.replace((text.substring(tempIndex, tempIndex + unit.length() + 1)), "");
                     break;
-                }else {
+                } else {
                     digitUnit = dayToInteger.get(unit);
                     text = text.replace(unit, "");
                     break;
@@ -141,12 +135,12 @@ public class DateParse {
         int res = digitUnit * numberOfUnits;
         String nameOfProduct = text.trim();
         text = fullText.trim();
-        String otherText = text.replace(nameOfProduct,"").trim();
+        String otherText = text.replace(nameOfProduct, "").trim();
 
         System.out.println(nameOfProduct);
         System.out.println(otherText);
         System.out.println(res);
-        String [] results = {nameOfProduct, otherText};
+        String[] results = {nameOfProduct, otherText};
         return results;
     }
 
@@ -173,33 +167,33 @@ public class DateParse {
         ArrayList<Integer> allNumbers = new ArrayList<Integer>();
         int index = -1;
         int number;
-        for(String temp : numbers) {
+        for (String temp : numbers) {
             index = text.indexOf(temp);
-            if(index > -1) {
+            if (index > -1) {
                 number = stringToInteger.get(temp);
-                if(index + temp.length() < text.length()){
-                    if (text.charAt(index + temp.length()) == ' '){
-                        text = text.replace((text.substring(index, index + temp.length())),"");
+                if (index + temp.length() < text.length()) {
+                    if (text.charAt(index + temp.length()) == ' ') {
+                        text = text.replace((text.substring(index, index + temp.length())), "");
                         allNumbers.add(number);
 
-                    }else {
+                    } else {
                         String we = text.substring(index + temp.length(), index + temp.length() + 4);
-                        if(text.substring(index + temp.length(), index + temp.length() + 4).equals("teen")) {
-                            number +=10;
-                            text = text.replace((text.substring(index, index + temp.length() + 4)),"");
+                        if (text.substring(index + temp.length(), index + temp.length() + 4).equals("teen")) {
+                            number += 10;
+                            text = text.replace((text.substring(index, index + temp.length() + 4)), "");
                             allNumbers.add(number);
 
                         }
-                        if(text.substring(index + temp.length(), index + temp.length() + 2).equals("ty")) {
-                            number *=10;
-                            text = text.replace((text.substring(index, index + temp.length() + 2)),"");
+                        if (text.substring(index + temp.length(), index + temp.length() + 2).equals("ty")) {
+                            number *= 10;
+                            text = text.replace((text.substring(index, index + temp.length() + 2)), "");
                             allNumbers.add(number);
 
                         }
 
                     }
                 }
-            }else {
+            } else {
                 continue;
             }
 
@@ -207,8 +201,8 @@ public class DateParse {
         }
 
         int numberOfUnits = 0;
-        for(Integer a : allNumbers){
-            numberOfUnits+=a;
+        for (Integer a : allNumbers) {
+            numberOfUnits += a;
         }
 
         HashMap<String, Integer> dayToInteger = new HashMap<String, Integer>();
@@ -226,14 +220,14 @@ public class DateParse {
         dayToInteger.put("Months", 30);
 
         int digitUnit = 1;
-        for(String unit: timeUnits) {
+        for (String unit : timeUnits) {
             int tempIndex = text.indexOf(unit);
-            if(text.indexOf(unit)> -1) {
-                if(tempIndex + unit.length() < text.length()){
+            if (text.contains(unit)) {
+                if (tempIndex + unit.length() < text.length()) {
                     digitUnit = dayToInteger.get(unit);
-                    text = text.replace((text.substring(tempIndex, tempIndex + unit.length() + 1)),"");
+                    text = text.replace((text.substring(tempIndex, tempIndex + unit.length() + 1)), "");
                     break;
-                }else {
+                } else {
                     digitUnit = dayToInteger.get(unit);
                     text = text.replace(unit, "");
                     break;
@@ -245,5 +239,15 @@ public class DateParse {
         Calendar c = Calendar.getInstance();
         c.add(Calendar.DATE, res);  // number of days to add
         return c.getTime();
+    }
+
+    public static String parseTranscript(String s) {
+        int i = s.indexOf("transcript");
+        if (i > 0) {
+            s = s.substring(i + 14);
+            return s.substring(0, s.indexOf('\"'));
+        } else {
+            return "";
+        }
     }
 }
