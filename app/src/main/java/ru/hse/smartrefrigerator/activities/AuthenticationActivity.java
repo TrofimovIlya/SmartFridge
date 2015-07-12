@@ -1,6 +1,5 @@
 package ru.hse.smartrefrigerator.activities;
 
-import android.accounts.AccountManager;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -11,13 +10,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
-
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.common.AccountPicker;
-//import com.google.android.gms.auth.GoogleAuthUtil;
-//import com.google.android.gms.common.AccountPicker;
-
 import ru.hse.smartrefrigerator.R;
 import ru.hse.smartrefrigerator.models.Product;
 import ru.hse.smartrefrigerator.net.OnProductModifyCallback;
@@ -25,7 +20,9 @@ import ru.hse.smartrefrigerator.net.ProductListTransmission;
 import ru.hse.smartrefrigerator.utils.PreferencesConsts;
 
 import java.util.ArrayList;
-import java.util.List;
+
+//import com.google.android.gms.auth.GoogleAuthUtil;
+//import com.google.android.gms.common.AccountPicker;
 
 public class AuthenticationActivity extends Activity {
     @Override
@@ -66,7 +63,7 @@ public class AuthenticationActivity extends Activity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.home) {
             return true;
         }
 
@@ -85,7 +82,7 @@ public class AuthenticationActivity extends Activity {
                     editor.putString(PreferencesConsts.LIST_VERSION, version);
                     editor.putString(PreferencesConsts.USER_ID, id);
 
-                    editor.commit();
+                    editor.apply();
                 }
             });
 

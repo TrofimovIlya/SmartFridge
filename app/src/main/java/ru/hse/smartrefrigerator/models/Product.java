@@ -26,8 +26,8 @@ public class Product {
         return expirationDate;
     }
 
-    public void setExpirationDate(Date expiretionDate) {
-        this.expirationDate = expiretionDate;
+    public void setExpirationDate(Date expirationDate) {
+        this.expirationDate = expirationDate;
     }
 
     @Override
